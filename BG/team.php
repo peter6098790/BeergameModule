@@ -70,28 +70,33 @@
     $role=$_POST['role'];
     $tname=$_POST['tname'];
     if ($tname) {
-        $sql1 = "insert into team (tname) values (?)";
+        $sql1 = "insert into team (tname,uid$role) values (?,?);";
         $stmt1 = mysqli_prepare($db, $sql1); 
-        mysqli_stmt_bind_param($stmt1, "s",$tname); 
+        mysqli_stmt_bind_param($stmt1, "si",$tname,$role); 
         mysqli_stmt_execute($stmt1);  
         echo "room added.";
     } else {
         echo "empty title, cannot insert.";
     }
-    if ($role) {
-        $sql2 = "select team.ton from team where team.tname = '$tname'";
-        $stmt2 = mysqli_prepare($db, $sql2);
-        mysqli_stmt_execute($stmt2); //°õ¦æSQL
-        $result = mysqli_stmt_get_result($stmt2);
+    /*if ($role) {
+        $sql2 = "insert into team (uid$role) values (?)";
+        $stmt2 = mysqli_prepare($db, $sql2); 
+        mysqli_stmt_bind_param($stmt2, "i",$role); 
+        mysqli_stmt_execute($stmt2);  
+        echo "room added.";
+    } else {
+        echo "empty title, cannot insert.";
+    }*/
+    /*if ($role) {
+        $sql = "insert into team (uid$role) values (?)";
+        $stmt = mysqli_prepare($db, $sql);
+        mysqli_stmt_execute($stmt); //
+        $result = mysqli_stmt_get_result($stmt);
         $rs = mysqli_fetch_assoc($result);
-        $id = $rs['ton'];
+        //$id = $rs['ton'];
+        //select team.uid$role from team where team.tname = '$tname'
         
-        $sql3 = "insert into tgame (ton,role) values (?,?)";
-        $stmt3 = mysqli_prepare($db, $sql3); //prepare sql statement
-        mysqli_stmt_bind_param($stmt3, "ii",$id,$role); //bind parameters with variables
-        mysqli_stmt_execute($stmt3);
-        
-    }
+    }*/
     ?>
     </body>
     </html>
