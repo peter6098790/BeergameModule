@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="UTF-8" />
         <meta name="keywords" content=" " />
         <meta name="description" content=" " />
-        <title>配隊</title>
+        <title>建立隊伍</title>
         <style type="text/css">
          body {
             background-image: url(1.jpg);
@@ -60,18 +61,24 @@
         }
         </style>
     </head>
+    <?php
+require("userModel.php");
+$id=getCurrentUser();
+echo $id;
+?>
     <body>
+        <!-- 建立隊伍的介面-->
         <table id="main">
             <form id="team" method="post" action="team.php" accept-charset="utf-8">
                 <tr>
-                    <td colspan="5" id="background"><font size="6">隊伍配對</font></td>
+                    <td colspan="5" id="background"><font size="6">建立隊伍</font></td>
                 </tr>       
                 <tr>
                     <td>你的團隊名稱</td>
-                    <td>零售商</td>
-                    <td>批發商</td>
-                    <td>大盤商</td>
                     <td>工廠</td>
+                    <td>大盤商</td>
+                    <td>批發商</td>
+                    <td>零售商</td>
                 </tr>
                 <tr>
                     <td>

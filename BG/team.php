@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="UTF-8" />
         <meta name="keywords" content=" " />
         <meta name="description" content=" " />
-        <title>配隊</title>
+        <title>建立隊伍</title>
         <style type="text/css">
          body {
             background-image: url(1.jpg);
@@ -61,42 +62,33 @@
         </style>
     </head>
     <body>
-
-    <p>insert new room</p>
-    <hr />
-    <?php
-    require('dbconfig.php');
-    global $db;
-    $role=$_POST['role'];
-    $tname=$_POST['tname'];
-    if ($tname) {
-        $sql1 = "insert into team (tname,uid$role) values (?,?);";
-        $stmt1 = mysqli_prepare($db, $sql1); 
-        mysqli_stmt_bind_param($stmt1, "si",$tname,$role); 
-        mysqli_stmt_execute($stmt1);  
-        echo "room added.";
-    } else {
-        echo "empty title, cannot insert.";
-    }
-    /*if ($role) {
-        $sql2 = "insert into team (uid$role) values (?)";
-        $stmt2 = mysqli_prepare($db, $sql2); 
-        mysqli_stmt_bind_param($stmt2, "i",$role); 
-        mysqli_stmt_execute($stmt2);  
-        echo "room added.";
-    } else {
-        echo "empty title, cannot insert.";
-    }*/
-    /*if ($role) {
-        $sql = "insert into team (uid$role) values (?)";
-        $stmt = mysqli_prepare($db, $sql);
-        mysqli_stmt_execute($stmt); //
-        $result = mysqli_stmt_get_result($stmt);
-        $rs = mysqli_fetch_assoc($result);
-        //$id = $rs['ton'];
-        //select team.uid$role from team where team.tname = '$tname'
-        
-    }*/
-    ?>
+        <table id="main">
+            
+            <!--將新建的隊伍加入資料庫-->
+            <form id="team" method="post" accept-charset="utf-8">
+                <tr>
+                    <td id="background"><font size="6">隊伍建立成功</font></td>
+                </tr>
+                <?php
+                
+                require('dbconfig.php');
+                require("userModel.php");
+                $id = getCurrentUser();
+                global $db;
+             
+                $role=$_POST['role'];
+                $tname=$_POST['tname'];
+                if ($tname) {
+                    $sql1 = "insert into tgame (tname,r$role) values (?,?);";
+                    $stmt1 = mysqli_prepare($db, $sql1); 
+                    mysqli_stmt_bind_param($stmt1, "ss",$tname,$id); 
+                    mysqli_stmt_execute($stmt1);  
+                    echo "room added.";
+                } else {
+                    echo "empty title, cannot insert.";
+                }
+                ?>
+            </form>
+        </table>
     </body>
-    </html>
+</html>
